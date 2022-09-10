@@ -9,10 +9,13 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Server {
     private ServerSocket serverSocket;
     private HashMap<Socket, Connection> mapOfClients = new HashMap<>();
+    private final static ExecutorService EXECUTOR_SERVICE = Executors.newFixedThreadPool(50);
 
     public void startServer() {
         try {
@@ -30,9 +33,7 @@ public class Server {
             Connection connection = new Connection(clientSocket);
             mapOfClients.put(clientSocket, connection);
             ConsoleHelper.write("New client connected: " + clientSocket.getRemoteSocketAddress());
-            Thread thread = new Thread(new ServerThreadHandler(connection));
-            thread.setDaemon(true);
-            thread.start();
+            EXECUTOR_SERVICE.submit(new ServerThreadHandler(connection));
         }
     }
 
@@ -65,7 +66,6 @@ public class Server {
             }
         }
 
-        //TODO Continue creating main loop with DB handler class
         private void serverMainLoop() throws IOException, ClassNotFoundException {
             while (true) {
                 RequestResponse request = connection.receive();
@@ -100,7 +100,6 @@ public class Server {
                         }
                         break;
                     default:
-                        //SEND ERROR response type
                         response = new Error(RequestResponseType.ERROR, new Exception("Wrong request type. Try again."));
                         break;
                 }

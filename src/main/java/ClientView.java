@@ -28,12 +28,11 @@ public class ClientView {
                         + "\"edit operation\"\n"
                         + "\"remove class\" or bundle \"remove classes\"\n"
                         + "Where first parameter is OPERATION type, second is INSTANCE type and third is INSTANCE ID.");
-            }
-            else if (OPERATION_TYPES.contains(textRequest.split(" ")[0]) && INSTANCE_TYPES.contains(textRequest.split(" ")[1])) break;
+            } else if (OPERATION_TYPES.contains(textRequest.split(" ")[0]) && INSTANCE_TYPES.contains(textRequest.split(" ")[1]))
+                break;
             else ConsoleHelper.write("Wrong operation type or instance. Try again.");
         }
         String[] textRequestSplit = textRequest.split(" ");
-
         switch (textRequestSplit[0]) {
             case "read": //read instance
                 ConsoleHelper.write("Enter condition for reading (name=alex):");
@@ -68,11 +67,9 @@ public class ClientView {
                 request = new InstanceRemove(RequestResponseType.REMOVE_INSTANCE, textRequestSplit[1], inputRemove);
                 break;
             default:
-
                 break;
         }
         return request;
-
     }
 
     private static User getUserConsole() throws IOException, ParseException, NoSuchAlgorithmException, InvalidKeySpecException {

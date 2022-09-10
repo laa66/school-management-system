@@ -11,8 +11,8 @@ import java.sql.SQLException;
 import java.util.Random;
 
 //static helper class for sending requests to MySQL DB
-//TODO trigger number_of_students counting in classes table added reading user port and hostname in client class//DONE
-//TODO check error in verify users section after inserting not existing username //DONE
+// TODO: 2022-09-10 add Executor Service for handling threads in server class
+// TODO: 2022-09-10 add JSON as default format of response from server
 //TODO add functionality: read specific subject marks and presence return map/list by user
 //TODO read specific marks and presence by class and subject
 //TODO read average by class, subject and student
