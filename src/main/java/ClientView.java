@@ -36,7 +36,10 @@ public class ClientView {
         switch (textRequestSplit[0]) {
             case "read": //read instance
                 ConsoleHelper.write("Enter condition for reading (name=alex):");
-                String input = ConsoleHelper.readString();
+                String input;
+                do {
+                    input = ConsoleHelper.readString();
+                } while (!input.contains("="));
                 request = new InstanceRead(RequestResponseType.READ_INSTANCE, textRequestSplit[1], input);
                 break;
             case "create": //create instance
@@ -56,14 +59,20 @@ public class ClientView {
                 break;
             case "edit": //edit instance
                 ConsoleHelper.write("Enter new value (name=andrew):");
-                String inputNewValue = ConsoleHelper.readString();
+                String inputNewValue;
+                do {
+                    inputNewValue = ConsoleHelper.readString();
+                } while (!inputNewValue.contains("="));
                 ConsoleHelper.write("Enter condition for editing (name=alex):");
                 String inputCondition = ConsoleHelper.readString();
                 request = new InstanceEdit(RequestResponseType.EDIT_INSTANCE, textRequestSplit[1], inputNewValue, inputCondition);
                 break;
             case "remove": //remove instance
                 ConsoleHelper.write("Enter condition for remove operation (name=alex):");
-                String inputRemove = ConsoleHelper.readString();
+                String inputRemove;
+                do {
+                    inputRemove = ConsoleHelper.readString();
+                } while (!inputRemove.contains("="));
                 request = new InstanceRemove(RequestResponseType.REMOVE_INSTANCE, textRequestSplit[1], inputRemove);
                 break;
             default:

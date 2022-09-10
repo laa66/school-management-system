@@ -11,11 +11,11 @@ import java.sql.SQLException;
 import java.util.Random;
 
 //static helper class for sending requests to MySQL DB
-// TODO: 2022-09-10 add Executor Service for handling threads in server class
+// TODO: 2022-09-10 add Executor Service for handling threads in server class /DONE
 // TODO: 2022-09-10 add JSON as default format of response from server
-//TODO add functionality: read specific subject marks and presence return map/list by user
-//TODO read specific marks and presence by class and subject
-//TODO read average by class, subject and student
+// TODO add functionality: read specific subject marks and presence return map/list by user
+// TODO read specific marks and presence by class and subject
+// TODO read average by class, subject and student
 public class DatabaseHandler {
 
     public static boolean verifyUser(RequestResponse requestResponse) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
