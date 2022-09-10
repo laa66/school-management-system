@@ -9,6 +9,7 @@ public class InstanceCreate extends RequestResponse {
     private User user;
     private Operation operation;
     private ClassInstance classInstance;
+    private String instanceJSON;
 
     public InstanceCreate(RequestResponseType requestResponseType, Transferable transferable) {
         super(requestResponseType);
@@ -28,6 +29,14 @@ public class InstanceCreate extends RequestResponse {
 
     public ClassInstance getClassInstance() {
         return classInstance;
+    }
+
+    public String getInstanceJSON() {
+        return instanceJSON;
+    }
+
+    public void setInstanceJSON(String instanceJSON) {
+        this.instanceJSON = instanceJSON;
     }
 
     @Override

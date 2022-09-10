@@ -61,7 +61,7 @@ public class Client {
                 switch (response.getRequestType()) {
                     case CREATE_INSTANCE:
                         InstanceCreate instanceCreate = (InstanceCreate) response;
-                        ConsoleHelper.write(String.valueOf(instanceCreate));
+                        ConsoleHelper.write(instanceCreate.getInstanceJSON());
                         break;
                     case DEFAULT:
                         Default d = (Default) response;

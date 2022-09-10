@@ -5,6 +5,7 @@ import message.*;
 import message.Error;
 import security.Secure;
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
@@ -27,15 +28,16 @@ public class DatabaseHandler {
         return Secure.validatePassword(password, user.getHashPassword());
     }
 
-    public static RequestResponse readInstance(RequestResponse requestResponse) throws SQLException {
+    public static RequestResponse readInstance(RequestResponse requestResponse) throws SQLException, IOException {
         if (requestResponse.getRequestType() != RequestResponseType.READ_INSTANCE) return new Error(RequestResponseType.ERROR, new Exception("Wrong request type. Try again."));
         InstanceRead instanceRead = (InstanceRead) requestResponse;
-        RequestResponse response = null;
+        InstanceCreate response = null;
         switch (instanceRead.getTableName()) {
             case "user":
                 UserDAO userDAO = new UserDAO();
                 User user = userDAO.getUser(instanceRead.getColumnValue());
                 response = new InstanceCreate(RequestResponseType.CREATE_INSTANCE, user);
+                response.setInstanceJSON(Transferable.instanceToJSON(user));
                 break;
             case "class":
                 ClassInstanceDAO classInstanceDAO = new ClassInstanceDAO();

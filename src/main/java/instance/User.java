@@ -1,7 +1,12 @@
 package instance;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import java.util.Date;
 
+@JsonAutoDetect
 public class User implements Transferable {
     private int userId;
     private String classId;
@@ -10,7 +15,9 @@ public class User implements Transferable {
     private String firstname;
     private String lastname;
     private int personalIdNumber;
+    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss", timezone = "Europe/Warsaw")
     private Date birthDate;
+    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss", timezone = "Europe/Warsaw")
     private Date joinDate;
     private boolean teacher;
 
@@ -31,6 +38,7 @@ public class User implements Transferable {
         this.teacher = teacher;
     }
 
+    @JsonGetter
     public int getUserId() {
         return userId;
     }
@@ -39,6 +47,7 @@ public class User implements Transferable {
         this.userId = userId;
     }
 
+    @JsonGetter
     public String getClassId() {
         return classId;
     }
@@ -47,6 +56,7 @@ public class User implements Transferable {
         this.classId = classId;
     }
 
+    @JsonGetter
     public String getUsername() {
         return username;
     }
@@ -55,6 +65,7 @@ public class User implements Transferable {
         this.username = username;
     }
 
+    @JsonGetter
     public String getHashPassword() {
         return hashPassword;
     }
@@ -63,6 +74,7 @@ public class User implements Transferable {
         this.hashPassword = hashPassword;
     }
 
+    @JsonGetter
     public String getFirstname() {
         return firstname;
     }
@@ -71,6 +83,7 @@ public class User implements Transferable {
         this.firstname = firstname;
     }
 
+    @JsonGetter
     public String getLastname() {
         return lastname;
     }
@@ -79,6 +92,7 @@ public class User implements Transferable {
         this.lastname = lastname;
     }
 
+    @JsonGetter
     public int getPersonalIdNumber() {
         return personalIdNumber;
     }
@@ -87,6 +101,7 @@ public class User implements Transferable {
         this.personalIdNumber = personalIdNumber;
     }
 
+    @JsonGetter
     public Date getBirthDate() {
         return birthDate;
     }
@@ -95,6 +110,7 @@ public class User implements Transferable {
         this.birthDate = birthDate;
     }
 
+    @JsonGetter
     public Date getJoinDate() {
         return joinDate;
     }
@@ -103,6 +119,7 @@ public class User implements Transferable {
         this.joinDate = joinDate;
     }
 
+    @JsonGetter
     public boolean isTeacher() {
         return teacher;
     }
