@@ -2,6 +2,9 @@ package message;
 
 import instance.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //class for request to create all types of instances in DB
 //and create responses to create all types of instances that will be later send from server to client
 
@@ -9,13 +12,16 @@ public class InstanceCreate extends RequestResponse {
     private User user;
     private Operation operation;
     private ClassInstance classInstance;
+    private Marks marks;
     private String instanceJSON;
 
+    //constructor for single instance operations
     public InstanceCreate(RequestResponseType requestResponseType, Transferable transferable) {
         super(requestResponseType);
         if (transferable instanceof ClassInstance) this.classInstance = (ClassInstance) transferable;
         if (transferable instanceof Operation) this.operation = (Operation) transferable;
         if (transferable instanceof User) this.user = (User) transferable;
+        if (transferable instanceof Marks) this.marks = (Marks) transferable;
     }
 
     //getters and setters
@@ -29,6 +35,10 @@ public class InstanceCreate extends RequestResponse {
 
     public ClassInstance getClassInstance() {
         return classInstance;
+    }
+
+    public Marks getMarks() {
+        return marks;
     }
 
     public String getInstanceJSON() {
@@ -45,6 +55,8 @@ public class InstanceCreate extends RequestResponse {
                 "user=" + user +
                 ", operation=" + operation +
                 ", classInstance=" + classInstance +
+                ", marks=" + marks +
+                ", instanceJSON='" + instanceJSON + '\'' +
                 '}';
     }
 }

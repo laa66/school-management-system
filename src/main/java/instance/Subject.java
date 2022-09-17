@@ -1,7 +1,7 @@
 package instance;
 
 //for now enum, if transfer through JSON will be available then make abstract class subject/factory pattern
-public enum Subject {
+public enum Subject implements Transferable {
     MATHEMATICS,
     COMPUTER_SCIENCE,
     MUSIC,
@@ -13,5 +13,6 @@ public enum Subject {
     BIOLOGY,
     HISTORY,
     PHYSICS,
-    GEOGRAPHY
+    GEOGRAPHY,
+    ALL
 }

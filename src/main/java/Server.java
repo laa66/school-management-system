@@ -37,7 +37,7 @@ public class Server {
         }
     }
 
-    public class ServerThreadHandler implements Runnable {
+    public static class ServerThreadHandler implements Runnable {
         private final Connection connection;
         private String username;
 

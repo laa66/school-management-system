@@ -12,8 +12,6 @@ import java.sql.SQLException;
 import java.util.Random;
 
 //static helper class for sending requests to MySQL DB
-// TODO: 2022-09-10 add Executor Service for handling threads in server class /DONE
-// TODO: 2022-09-10 add JSON as default format of response from server
 // TODO add functionality: read specific subject marks and presence return map/list by user
 // TODO read specific marks and presence by class and subject
 // TODO read average by class, subject and student
@@ -48,6 +46,20 @@ public class DatabaseHandler {
                 OperationDAO operationDAO = new OperationDAO();
                 Operation operation = operationDAO.getOperation(instanceRead.getColumnValue());
                 response = new InstanceCreate(RequestResponseType.CREATE_INSTANCE, operation);
+                break;
+            case "marks":
+                OperationDAO marksDAO = new OperationDAO();
+                Marks marks = null;
+                if (instanceRead.getColumnValue().equals("student")) marks = marksDAO.getUserMarksBySubject(instanceRead.getSubjectValue(), instanceRead.getUsernameValue());
+                else if (instanceRead.getColumnValue().equals("class")) marks = marksDAO.getClassMarksBySubject(instanceRead.getSubjectValue(), instanceRead.getUsernameValue());
+                response = new InstanceCreate(RequestResponseType.CREATE_INSTANCE, marks);
+                break;
+            case "average":
+                OperationDAO avgDAO = new OperationDAO();
+                Marks avg = null;
+                if (instanceRead.getColumnValue().equals("student")) avg = avgDAO.getUserAverageBySubject(instanceRead.getSubjectValue(), instanceRead.getUsernameValue());
+                else if (instanceRead.getColumnValue().equals("class")) avg = avgDAO.getClassAverageBySubject(instanceRead.getSubjectValue(), instanceRead.getUsernameValue());
+                response = new InstanceCreate(RequestResponseType.CREATE_INSTANCE, avg);
                 break;
         }
         return response;

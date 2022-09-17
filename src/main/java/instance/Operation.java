@@ -11,6 +11,10 @@ public class Operation implements Transferable {
     private Subject subject; //enum
     private Date date;
     private String note;
+    //fields for marks reading
+    private String firstName;
+    private String lastName;
+    private String averageMark;
 
     public Operation() {
 
@@ -83,16 +87,43 @@ public class Operation implements Transferable {
         this.note = note;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getAverageMark() {
+        return averageMark;
+    }
+
+    public void setAverageMark(String averageMark) {
+        this.averageMark = averageMark;
+    }
+
     @Override
     public String toString() {
         return "Operation{" +
-                "operationId='" + operationId + '\'' +
+                "operationId=" + operationId +
                 ", classId='" + classId + '\'' +
-                ", userId='" + userId + '\'' +
+                ", userId=" + userId +
                 ", mark='" + mark + '\'' +
                 ", subject=" + subject +
                 ", date=" + date +
                 ", note='" + note + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", averageMark='" + averageMark + '\'' +
                 '}';
     }
 }

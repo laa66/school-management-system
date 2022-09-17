@@ -13,7 +13,7 @@ import java.util.*;
 public class ClientView {
     public final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final Set<String> OPERATION_TYPES = new HashSet<String>(){{add("read");add("create");add("edit");add("remove");}};
-    private static final Set<String> INSTANCE_TYPES = new HashSet<String>(){{add("user");add("class");add("operation");}};
+    private static final Set<String> INSTANCE_TYPES = new HashSet<String>(){{add("user");add("class");add("operation");add("marks");add("average");}};
 
     public static RequestResponse getRequest() throws Exception {
         RequestResponse request = null;
@@ -23,24 +23,72 @@ public class ClientView {
             textRequest = ConsoleHelper.readString();
             if (textRequest.equalsIgnoreCase("info")) {
                 ConsoleHelper.write("Your request should look like:\n"
-                        + "\"read user\" or bundle \"read users\"\n"
-                        + "\"create user\" or bundle \"create users\"\n"
+                        + "\"read user\"\n"
+                        + "\"create user\"\n"
                         + "\"edit operation\"\n"
-                        + "\"remove class\" or bundle \"remove classes\"\n"
-                        + "Where first parameter is OPERATION type, second is INSTANCE type and third is INSTANCE ID.");
-            } else if (OPERATION_TYPES.contains(textRequest.split(" ")[0]) && INSTANCE_TYPES.contains(textRequest.split(" ")[1]))
-                break;
+                        + "\"remove class\"\n"
+                        + "\"read marks\"\n" //NEW
+                        + "\"read average\"\n" //NEW
+                        + "Where first parameter is OPERATION type, second is INSTANCE type");
+            } else if (OPERATION_TYPES.contains(textRequest.split(" ")[0]) && INSTANCE_TYPES.contains(textRequest.split(" ")[1])) break;
             else ConsoleHelper.write("Wrong operation type or instance. Try again.");
         }
         String[] textRequestSplit = textRequest.split(" ");
         switch (textRequestSplit[0]) {
             case "read": //read instance
-                ConsoleHelper.write("Enter condition for reading (name=alex):");
-                String input;
-                do {
-                    input = ConsoleHelper.readString();
-                } while (!input.contains("="));
-                request = new InstanceRead(RequestResponseType.READ_INSTANCE, textRequestSplit[1], input);
+                if (textRequestSplit[1].equals("marks")) {
+                    String username;
+                    String input;
+                    Subject subject;
+                    ConsoleHelper.write("Enter which grades you want to read (student/class):");
+                    while (true) {
+                        input = ConsoleHelper.readString();
+                        if (input.equals("student") || input.equals("class")) break;
+                    }
+                    ConsoleHelper.write("Enter username/class_id: ");
+                    while (true) {
+                        username = ConsoleHelper.readString();
+                        if (!username.isEmpty()) break;
+                    }
+                    ConsoleHelper.write("Enter subject: ");
+                    while (true) {
+                        try {
+                            subject = Subject.valueOf(ConsoleHelper.readString().toUpperCase());
+                            break;
+                        } catch (IllegalArgumentException e) {e.printStackTrace();}
+                    }
+                    request = new InstanceRead(RequestResponseType.READ_INSTANCE, textRequestSplit[1], input, subject, username);
+                } else if (textRequestSplit[1].equals("average")) {
+                    ConsoleHelper.write("Enter which grades average you want to read (student/class):");
+                    String username;
+                    String input;
+                    String subject;
+                    while (true) {
+                        input = ConsoleHelper.readString();
+                        if (input.equals("student") || input.equals("class")) break;
+                    }
+                    ConsoleHelper.write("Enter username/class_id: ");
+                    while (true) {
+                        username = ConsoleHelper.readString();
+                        if (!username.isEmpty()) break;
+                    }
+                    ConsoleHelper.write("Enter subject: ");
+                    while (true) {
+                        subject = ConsoleHelper.readString().toUpperCase();
+                        try {
+                            Subject.valueOf(subject);
+                            break;
+                        } catch (IllegalArgumentException ignored) {}
+                    }
+                    request = new InstanceRead(RequestResponseType.READ_INSTANCE, textRequestSplit[1], input, Subject.valueOf(subject), username);
+                } else {
+                    ConsoleHelper.write("Enter condition for reading (name=alex):");
+                    String input;
+                    do {
+                        input = ConsoleHelper.readString();
+                    } while (!input.contains("="));
+                    request = new InstanceRead(RequestResponseType.READ_INSTANCE, textRequestSplit[1], input);
+                }
                 break;
             case "create": //create instance
                 switch (textRequestSplit[1]) {
@@ -116,7 +164,7 @@ public class ClientView {
         ConsoleHelper.write("Enter mark: ");
         operation.setMark(ConsoleHelper.readString());
         ConsoleHelper.write("Enter subject: ");
-        operation.setSubject(Subject.valueOf(ConsoleHelper.readString()));
+        operation.setSubject(Subject.valueOf(ConsoleHelper.readString().toUpperCase()));
         operation.setDate(new Date());
         ConsoleHelper.write("Enter note: ");
         operation.setNote(ConsoleHelper.readString());

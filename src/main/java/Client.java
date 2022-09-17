@@ -42,7 +42,7 @@ public class Client {
                     if (!flag) ConsoleHelper.write("Verification failed. Try again.");
                     ConsoleHelper.write("Enter username and password: ");
                     username = ConsoleHelper.readString();
-                    String password = ConsoleHelper.readString(); //TODO hash password and send it to server
+                    String password = ConsoleHelper.readString();
                     flag = false;
                     connection.send(new VerificationData(RequestResponseType.VERIFICATION_DATA, username, password));
                 } else if (response.getRequestType() == RequestResponseType.VERIFICATION_ACCEPTED) {
@@ -61,7 +61,7 @@ public class Client {
                 switch (response.getRequestType()) {
                     case CREATE_INSTANCE:
                         InstanceCreate instanceCreate = (InstanceCreate) response;
-                        ConsoleHelper.write(instanceCreate.getInstanceJSON());
+                        ConsoleHelper.write(instanceCreate.toString());
                         break;
                     case DEFAULT:
                         Default d = (Default) response;
