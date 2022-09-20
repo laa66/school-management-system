@@ -2,9 +2,6 @@ package message;
 
 import instance.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 //class for request to create all types of instances in DB
 //and create responses to create all types of instances that will be later send from server to client
 

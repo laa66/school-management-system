@@ -14,5 +14,6 @@ public enum Subject implements Transferable {
     HISTORY,
     PHYSICS,
     GEOGRAPHY,
-    ALL
+    ALL,
+    NOTHING
 }

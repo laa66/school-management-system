@@ -12,9 +12,10 @@ import java.sql.SQLException;
 import java.util.Random;
 
 //static helper class for sending requests to MySQL DB
-// TODO add functionality: read specific subject marks and presence return map/list by user
-// TODO read specific marks and presence by class and subject
-// TODO read average by class, subject and student
+// TODO add functionality: read specific subject marks and presence return map/list by user /DONE
+// TODO read specific marks and presence by class and subject DONE
+// TODO read average by class, subject and student DONE
+// TODO: 2022-09-18 repair DATE format in java app read date from DB should be in DATETIME format
 public class DatabaseHandler {
 
     public static boolean verifyUser(RequestResponse requestResponse) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -58,7 +59,7 @@ public class DatabaseHandler {
                 OperationDAO avgDAO = new OperationDAO();
                 Marks avg = null;
                 if (instanceRead.getColumnValue().equals("student")) avg = avgDAO.getUserAverageBySubject(instanceRead.getSubjectValue(), instanceRead.getUsernameValue());
-                else if (instanceRead.getColumnValue().equals("class")) avg = avgDAO.getClassAverageBySubject(instanceRead.getSubjectValue(), instanceRead.getUsernameValue());
+                else if (instanceRead.getColumnValue().equals("final_student")) avg = avgDAO.getUserFinalAverage(instanceRead.getUsernameValue());
                 response = new InstanceCreate(RequestResponseType.CREATE_INSTANCE, avg);
                 break;
         }

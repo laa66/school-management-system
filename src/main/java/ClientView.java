@@ -59,20 +59,21 @@ public class ClientView {
                     }
                     request = new InstanceRead(RequestResponseType.READ_INSTANCE, textRequestSplit[1], input, subject, username);
                 } else if (textRequestSplit[1].equals("average")) {
-                    ConsoleHelper.write("Enter which grades average you want to read (student/class):");
+                    ConsoleHelper.write("Enter which grades average you want to read (student/final_student):");
                     String username;
                     String input;
                     String subject;
                     while (true) {
                         input = ConsoleHelper.readString();
-                        if (input.equals("student") || input.equals("class")) break;
+                        if (input.equals("student") || input.equals("final_student")) break;
                     }
-                    ConsoleHelper.write("Enter username/class_id: ");
+                    ConsoleHelper.write("Enter username: ");
                     while (true) {
                         username = ConsoleHelper.readString();
                         if (!username.isEmpty()) break;
                     }
-                    ConsoleHelper.write("Enter subject: ");
+
+                    ConsoleHelper.write("Enter subject (FOR STUDENT FINAL AVERAGE GRADE ENTER NOTHING): ");
                     while (true) {
                         subject = ConsoleHelper.readString().toUpperCase();
                         try {

@@ -124,6 +124,6 @@ public class Operation implements Transferable {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", averageMark='" + averageMark + '\'' +
-                '}';
+                '}' + "\n";
     }
 }
