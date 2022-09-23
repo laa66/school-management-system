@@ -4,6 +4,7 @@ import message.Error;
 import java.io.IOException;
 import java.net.Socket;
 
+// TODO: 2022-09-23 change output from toString received object to JSON formatted text
 public class Client {
     private Socket clientSocket;
     private Connection connection;

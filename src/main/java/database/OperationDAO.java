@@ -2,10 +2,8 @@ package database;
 
 import instance.*;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 public class OperationDAO extends AbstractInstanceDAO {
@@ -28,7 +26,7 @@ public class OperationDAO extends AbstractInstanceDAO {
         operation.setUserId(resultSet.getInt("user_id"));
         operation.setMark(resultSet.getString("mark"));
         operation.setSubject(Subject.valueOf(resultSet.getString("subject").toUpperCase()));
-        operation.setDate(resultSet.getDate("date"));
+        operation.setDate(resultSet.getTimestamp("date"));
         operation.setNote(resultSet.getString("note"));
         close();
         return operation;
@@ -73,8 +71,7 @@ public class OperationDAO extends AbstractInstanceDAO {
         System.out.println("Rows deleted: " + result);
         return true;
     }
-    // TODO: 2022-09-17 implement fetching all grades for class and grades from special subject for class DONE
-    // TODO: 2022-09-17 implement fetching ending semester grade (average of average grades from all student subjects)
+
     public Marks getUserMarksBySubject(Subject subjectValue, String usernameValue) throws SQLException {
         String query;
         if (subjectValue.equals(Subject.ALL)){
@@ -109,7 +106,6 @@ public class OperationDAO extends AbstractInstanceDAO {
         marks.setListOfMarks(operations);
         return marks;
     }
-
 
     public Marks getClassMarksBySubject(Subject subjectValue, String usernameValue) throws SQLException {
         String query;

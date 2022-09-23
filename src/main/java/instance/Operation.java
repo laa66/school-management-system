@@ -8,9 +8,10 @@ public class Operation implements Transferable {
     private String classId;
     private int userId;
     private String mark;
-    private Subject subject; //enum
+    private Subject subject;
     private Date date;
     private String note;
+
     //fields for marks reading
     private String firstName;
     private String lastName;

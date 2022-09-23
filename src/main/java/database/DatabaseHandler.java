@@ -10,12 +10,16 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.Random;
+/**
+    Static helper class for sending requests to MySQL DB
+*/
+// TODO: 2022-09-23 limit access for user who's not teacher allow them to only read their data from
+// TODO: 2022-09-23 limit operations for teacher users allow them only to read/edit users
+// TODO: 2022-09-23 create administrator user who will be allowed to do all operations except access to ROOT user
+// TODO: 2022-09-23 secure root user - block every operation on that user
+// TODO: 2022-09-23 reading data only by first_name + last_name
+// TODO: 2022-09-23 hide password when reading user 
 
-//static helper class for sending requests to MySQL DB
-// TODO add functionality: read specific subject marks and presence return map/list by user /DONE
-// TODO read specific marks and presence by class and subject DONE
-// TODO read average by class, subject and student DONE
-// TODO: 2022-09-18 repair DATE format in java app read date from DB should be in DATETIME format
 public class DatabaseHandler {
 
     public static boolean verifyUser(RequestResponse requestResponse) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -130,7 +134,7 @@ public class DatabaseHandler {
         return response;
     }
 
-    //helper methods
+    //helper methods for generating ID column
     private static int generateUniqueID(AbstractInstanceDAO abstractInstanceDAO) throws SQLException {
         int generatedID = generateID();
         while (abstractInstanceDAO.getAllID().contains(generatedID)) {

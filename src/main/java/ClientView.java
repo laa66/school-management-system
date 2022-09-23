@@ -9,7 +9,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-//console version
+/**
+    Console version of UI
+ */
+// TODO: 2022-09-23 check getting date datatype from user
 public class ClientView {
     public final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final Set<String> OPERATION_TYPES = new HashSet<String>(){{add("read");add("create");add("edit");add("remove");}};

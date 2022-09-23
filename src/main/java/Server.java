@@ -20,9 +20,10 @@ public class Server {
     public void startServer() {
         try {
             ConsoleHelper.write("Starting server...");
-            serverSocket = new ServerSocket(8080);
+            serverSocket = new ServerSocket(8081);
             connectionListening();
         } catch (IOException e) {
+            e.printStackTrace();
             ConsoleHelper.write("Error while starting server.");
         }
     }

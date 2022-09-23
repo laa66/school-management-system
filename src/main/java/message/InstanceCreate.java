@@ -2,8 +2,10 @@ package message;
 
 import instance.*;
 
-//class for request to create all types of instances in DB
-//and create responses to create all types of instances that will be later send from server to client
+/**
+ class for request to create all types of instances in DB and
+ create responses to create all types of instances that will be later send from server to client
+ */
 
 public class InstanceCreate extends RequestResponse {
     private User user;
